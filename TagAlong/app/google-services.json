@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "547685657211-siugrh6negcr2k6oiv7bvo10b4sp5g2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.TagAlong",
+            "certificate_hash": "fa5b1e0628c3d5d1aabd53a5cbcbcd5e04f06fdd"
+          }
+        },
+        {
           "client_id": "547685657211-teq6jht2pr9i9dvt6j4j862i5h7dl674.apps.googleusercontent.com",
           "client_type": 3
         }

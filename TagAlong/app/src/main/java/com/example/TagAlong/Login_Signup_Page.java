@@ -53,12 +53,13 @@ public class Login_Signup_Page extends AppCompatActivity {
         }
 
         if (ActivityCompat.checkSelfPermission(Login_Signup_Page.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Login_Signup_Page.this,
-                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Login_Signup_Page.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             List<String> missingPermissions = new ArrayList<>();
 
             missingPermissions.add( Manifest.permission.RECEIVE_SMS);
             missingPermissions.add( Manifest.permission.SEND_SMS);
+            missingPermissions.add( Manifest.permission.READ_SMS);
 
             ActivityCompat.requestPermissions(this, missingPermissions.toArray(new String[0]), 1);
             //    ActivityCompat#requestPermissions
