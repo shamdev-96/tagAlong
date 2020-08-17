@@ -26,6 +26,9 @@ public class DistanceOperation {
 
     public float CalculateDistance(Location placeLocation)
     {
+        if(placeLocation == null)
+            return 0f;
+
         Location startLocation = new Location("");
         startLocation.setLatitude(currentLocation.getLatitude());
         startLocation.setLongitude(currentLocation.getLongitude());

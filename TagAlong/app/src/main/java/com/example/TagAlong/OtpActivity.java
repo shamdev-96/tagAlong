@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
@@ -127,7 +128,13 @@ public class OtpActivity extends AppCompatActivity {
                                 Toast.makeText(OtpActivity.this, "Invalid code", Toast.LENGTH_LONG).show();
 
                             }
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException)
+                            {
+                                progressDialog.dismiss();
+                                Toast.makeText(OtpActivity.this, "You already registered!", Toast.LENGTH_LONG).show();
+                            }
                         }
+
                     }
                 });
     }
@@ -136,6 +143,7 @@ public class OtpActivity extends AppCompatActivity {
     {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
+
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -164,28 +172,20 @@ public class OtpActivity extends AppCompatActivity {
         databaseHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                FriendListOperation.Instance().SaveMyFriendList(matchUsers);
                 Toast.makeText(OtpActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(OtpActivity.this , MainMenu.class);;
                 startActivity(intent);
                 finish();
 
             }
-        },5000);
+        },3000);
 
         GetMyFriendInStartup(mAuth.getUid());
 
     }
 
     private void GetMyFriendInStartup(String userId) {
-
-        Handler firebaseHandler = new Handler();
-
-        firebaseHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FriendListOperation.Instance().SaveMyFriendList(matchUsers);
-            }
-        },4000);
 
         DocumentReference docRef =  DbOperation.getInstance().db.collection("userMatchesList").document(userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -202,7 +202,6 @@ public class OtpActivity extends AppCompatActivity {
                             matchUsers.add(perUser);
                         }
                     }
-
                 }
             }
         });

@@ -3,6 +3,7 @@ package com.example.TagAlong.OperationHelper;
 import android.net.Uri;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -25,6 +26,7 @@ public class FriendListOperation {
     public  FriendListOperation()
     {
         matchUsersId = new ArrayList<>();
+        matchProfileImage = new HashMap<>();
     }
 
     public  void SaveMyFriendList(ArrayList<String> matchUsers)

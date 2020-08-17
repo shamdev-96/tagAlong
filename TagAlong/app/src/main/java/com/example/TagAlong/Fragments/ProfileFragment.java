@@ -39,7 +39,7 @@ import java.util.Map;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment implements ProfileDataListener {
+public class ProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -144,8 +144,17 @@ public class ProfileFragment extends Fragment implements ProfileDataListener {
                                              mAuth.getUid();
                                              mAuth.signOut();
                                              progressDialog.dismiss();
-                                             FriendListOperation.Instance().matchUsersId.clear();
-                                             FriendListOperation.Instance().matchProfileImage.clear();
+
+                                             if(FriendListOperation.Instance().matchUsersId.size() > 0)
+                                             {
+                                                 FriendListOperation.Instance().matchUsersId.clear();
+                                             }
+
+                                             if(FriendListOperation.Instance().matchProfileImage.size() > 0)
+                                             {
+                                                 FriendListOperation.Instance().matchProfileImage.clear();
+                                             }
+
                                              ProfileOperation.getInstance().myProfile = null;
                                              Intent intent = new Intent(getActivity() , Login_Signup_Page.class);
                                              startActivity(intent);
@@ -187,7 +196,6 @@ public class ProfileFragment extends Fragment implements ProfileDataListener {
     }
 
 
-
     public void getProfileDataFromFirestore(FirebaseFirestore db) {
         String userId = mAuth.getUid();
         DocumentReference docRef = db.collection("users").document(userId);
@@ -216,11 +224,6 @@ public class ProfileFragment extends Fragment implements ProfileDataListener {
         Picasso.get().load(matchProfile.ImageUri).resize(110,100).into(my_profileImage);
 
         ProfileOperation.getInstance().SaveAllProfileData(matchProfile);
-    }
-
-    @Override
-    public void onDataLoaded(Profile editedProfile) {
-        UpdateViewWithData(editedProfile);
     }
 
 }

@@ -25,6 +25,7 @@ public class FindMatch extends AppCompatActivity {
 
     private Handler handler;
     private FirebaseAuth mAuth;
+    private  MatchedUsers matchedUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,18 @@ public class FindMatch extends AppCompatActivity {
 
         loadText.setText("Finding your match..");
 
+        handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                CheckToGetMatch(matchedUsers);
+            }
+        },4000);
+
         Intent intent = getIntent();
         final String placeName = intent.getStringExtra("placeName");
-
 
                 DocumentReference docRef =  DbOperation.getInstance().db.collection("matchedUsers").document(placeName);
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -55,14 +65,12 @@ public class FindMatch extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 Map<String, Object> map = document.getData();
-                                MatchedUsers user = new MatchedUsers(map);
-                                CheckToGetMatch(user);
+                                matchedUsers= new MatchedUsers(map);
 
                             }
                         }
                     }
                 });
-
 
             }
 
@@ -78,6 +86,7 @@ public class FindMatch extends AppCompatActivity {
             Intent intent = new Intent(FindMatch.this , NoFoundMatch.class);
             startActivity(intent);
             finish();
+            return;
 
         }
         else

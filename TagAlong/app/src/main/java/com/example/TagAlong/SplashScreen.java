@@ -31,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -63,15 +64,22 @@ public class SplashScreen extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        if (ActivityCompat.checkSelfPermission(SplashScreen.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SplashScreen.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(SplashScreen.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SplashScreen.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
+            List<String> missingPermissions = new ArrayList<>();
+
+             missingPermissions.add( Manifest.permission.ACCESS_FINE_LOCATION);
+            missingPermissions.add( Manifest.permission.ACCESS_COARSE_LOCATION);
+            missingPermissions.add( Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+
+            ActivityCompat.requestPermissions(this, missingPermissions.toArray(new String[0]), 1);
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
         }
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -82,11 +90,6 @@ public class SplashScreen extends AppCompatActivity {
                         if (location != null) {
                             DistanceOperation.getInstance().SaveMyCurrentLocation(location);
                         }
-                        else
-                        {
-                            return;
-                        }
-
                     }
                 });
 

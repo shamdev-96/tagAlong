@@ -2,11 +2,14 @@ package com.example.TagAlong;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import android.text.Editable;
@@ -24,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -45,6 +50,23 @@ public class Login_Signup_Page extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
+        }
+
+        if (ActivityCompat.checkSelfPermission(Login_Signup_Page.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Login_Signup_Page.this,
+                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            List<String> missingPermissions = new ArrayList<>();
+
+            missingPermissions.add( Manifest.permission.RECEIVE_SMS);
+            missingPermissions.add( Manifest.permission.SEND_SMS);
+
+            ActivityCompat.requestPermissions(this, missingPermissions.toArray(new String[0]), 1);
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
         }
 
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
