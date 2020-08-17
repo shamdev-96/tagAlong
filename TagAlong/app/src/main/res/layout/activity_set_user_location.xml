@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SetUserLocation"
+    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+    >
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp">
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You are almost there!"
+
+        android:gravity="center_horizontal"
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Now, select your prefered meetup location"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            />
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:id="@+id/locationFragmnet"/>
+
+        <Button
+            android:onClick="finalizeRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellowTheme"
+            android:layout_margin="80dp"
+            android:letterSpacing="0.2"
+            android:text="Proceed >"
+   />
+    </GridLayout>
+
+
+
+</RelativeLayout>

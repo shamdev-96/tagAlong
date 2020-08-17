@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfile"
+    android:orientation="vertical"
+    android:layout_marginBottom="40dp"
+    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment">
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp">
+    </EditText>
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+    </EditText>
+    <EditText
+        android:id="@+id/editAbout"
+        android:layout_width="300dp"
+        android:maxLines="3"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+    </EditText>
+
+    <fragment
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:id="@+id/userLocation"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="Save"
+        android:onClick="saveEditedProfile"
+        android:background="#3CB371"
+        android:letterSpacing="0.2"
+        >
+
+    </Button>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_marginBottom="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        android:background="#DC143C"
+        android:letterSpacing="0.2"
+        android:onClick="cancelEdit"
+        >
+
+    </Button>
+
+</GridLayout>
