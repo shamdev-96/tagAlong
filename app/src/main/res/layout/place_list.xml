@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginBottom="70dp">
+
+        <ImageView
+            android:id="@+id/place_Image"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+      />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+           android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/place_Name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Test"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/place_Description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Sham"
+                android:textColor="@color/black"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/place_Fee"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Sham"
+                android:textColor="@color/blackBlue"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/place_Distance"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="20km"
+                android:textColor="@color/black" />
+        </GridLayout>
+
+
+</LinearLayout>
