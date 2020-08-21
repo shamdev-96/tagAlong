@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
     compileSdkVersion 29
     buildToolsVersion "30.0.1"
 
